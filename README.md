@@ -1,6 +1,6 @@
 # 📝 Electron Todo App Boilerplate
 
-A modular boilerplate for building cross-platform desktop apps using **Electron**, **Next.js (SSG)**, **Mantine UI**, and **SQLite + Prisma**.  
+A modular boilerplate for building cross-platform desktop apps using **Electron**, **Next.js (SSG)**, **Mantine UI**, **React Query**, and **SQLite + Prisma**.  
 This project implements a basic **Todo App** with structured inter-process communication and persistent storage.
 
 ---
@@ -10,6 +10,7 @@ This project implements a basic **Todo App** with structured inter-process commu
 - **Electron + TypeScript** — Main process (native desktop container)
 - **Next.js (SSG)** — Renderer process (UI layer)
 - **Mantine UI** — Beautiful and responsive component library
+- **React Query** — Data fetching and caching for seamless UX
 - **IPC (IpcMain/IpcRenderer)** — Communication between main and renderer
 - **SQLite** — Embedded local database
 - **Prisma ORM** — Type-safe database client
