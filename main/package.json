@@ -1,0 +1,26 @@
+{
+  "name": "electron-todo-main",
+  "version": "1.0.0",
+  "description": "Main Process for Electron Todo app",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "nodemon --exec \"tsc --project tsconfig.json && node dist/index.js || exit 1\" -e ts --ignore dist",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prisma:generate": "npx prisma generate",
+    "prisma:migrate": "npx prisma migrate dev"
+  },
+  "author": "techorionai",
+  "license": "ISC",
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.5",
+    "@types/node": "^22.14.0",
+    "nodemon": "^3.1.9",
+    "prisma": "^6.6.0",
+    "tsc": "^2.0.4",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.6.0",
+    "dotenv": "^16.5.0"
+  }
+}
