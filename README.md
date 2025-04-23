@@ -1,110 +1,135 @@
 # 📝 Electron Todo App Boilerplate
 
-A minimal boilerplate for building cross-platform desktop applications using **Electron**, **TypeScript**, **Next.js (SSG)**, and **Mantine UI**.  
-This project showcases a simple **Todo App** with IPC-based communication between the **main** and **renderer** processes.
+A modular boilerplate for building cross-platform desktop apps using **Electron**, **Next.js (SSG)**, **Mantine UI**, and **SQLite + Prisma**.  
+This project implements a basic **Todo App** with structured inter-process communication and persistent storage.
 
 ---
 
 ## 🧱 Tech Stack
 
-- **Electron** — Desktop application runtime
-- **TypeScript** — Type-safe main process code
-- **IpcMain/IpcRenderer** — Communication bridge between Electron processes
-- **Next.js** — React-based renderer (Static Site Generation)
-- **Mantine UI** — Modern component library for clean UI
-
----
-
-## 🚀 Getting Started
-
-### 1. Clone the repo
-
-```bash
-git clone https://github.com/DEEJ4Y/electron-todo.git
-cd electron-todo
-```
-
-### 2. Install dependencies
-
-```bash
-npm install
-```
-
-### 3. Start in development
-
-```bash
-npm run dev
-```
-
-This will:
-
-- Launch the Electron app
-- Start the Next.js development server
-- Use IPC for communication between renderer and main
-
----
-
-## 🛠️ Available Scripts
-
-- `npm run dev` — Start Electron + Next.js in development
-- `npm run build` — Build the app for production
-- `npm run start` — Run the built app
-- `npm run lint` — Lint code with ESLint
-- `npm run typecheck` — Run TypeScript type checks
-
----
-
-## 💬 IPC Communication
-
-The app uses Electron’s `ipcMain` and `ipcRenderer` modules for inter-process communication:
-
-- Renderer (Next.js) sends todo updates to the main process
-- Main process can persist or manipulate data and send it back
-
----
-
-## 🖼️ UI
-
-The interface is built using **Mantine UI**, providing a modern look and responsive layout with components like:
-
-- Inputs
-- Buttons
-- Lists
-- Modal dialogs
-
----
-
-## 📦 Packaging
-
-You can package the app using Electron Builder or Forge (not included by default).  
-Recommended: [Electron Builder](https://www.electron.build/)
+- **Electron + TypeScript** — Main process (native desktop container)
+- **Next.js (SSG)** — Renderer process (UI layer)
+- **Mantine UI** — Beautiful and responsive component library
+- **IPC (IpcMain/IpcRenderer)** — Communication between main and renderer
+- **SQLite** — Embedded local database
+- **Prisma ORM** — Type-safe database client
 
 ---
 
 ## 📁 Project Structure
 
 ```
-.
-├── main/              # Electron main process (TypeScript)
-├── renderer/          # Next.js app (React + Mantine)
-├── public/            # Static assets
-├── package.json       # Project metadata & scripts
-├── tsconfig.json      # TypeScript config
+electron-todo/
+├─ browser/         # Next.js renderer with Mantine
+│  ├─ components/   # UI components
+│  ├─ pages/        # Next.js routes (SSG)
+│  ├─ public/       # Static assets
+│  ├─ styles/       # Global styles
+│  ├─ types/        # Shared types (preload, todo)
+│  └─ ...           # Configs and package setup
+│
+├─ main/            # Electron main process
+│  ├─ src/          # Source code (controllers, events, utils)
+│  ├─ prisma/       # DB schema, migrations, SQLite file
+│  └─ dist/         # Built files
+│
+├─ forge.config.js  # Electron Forge config
+├─ package.json     # Root-level scripts
+└─ README.md
 ```
 
 ---
 
-## 🧪 Features
+## 🚀 Getting Started
 
-- Add / Remove / Mark todos
-- Persistent state (can be extended to use file system or database)
-- Cross-platform compatible
-- SSG with SEO-ready structure
+### 1. Clone and install dependencies
+
+```bash
+git clone https://github.com/your-username/electron-todo.git
+cd electron-todo
+npm install
+```
+
+### 2. Set up the database (Prisma + SQLite)
+
+```bash
+cd main
+npx prisma generate
+npx prisma migrate dev --name init
+```
+
+> This creates the local `dev.db` file and prepares Prisma client.
+
+### 3. Run the app
+
+In separate terminals or via a process manager:
+
+```bash
+# Terminal 1 - Renderer
+cd browser
+npm install
+npm run dev
+
+# Terminal 2 - Main process
+cd main
+npm install
+npm run dev
+
+# Terminal 3 - Launch Electron
+npm start
+```
+
+> The Electron app will launch using the latest built Next.js and main process code.
+
+---
+
+## 🛠️ Available Scripts
+
+### Root
+- `npm start` — Launch Electron app using latest browser & main
+- `npm run make` — Package the app (via Electron Forge)
+
+### `browser/` (Next.js)
+- `npm run dev` — Start Next.js dev server
+- `npm run build` — Build static site
+- `npm run lint` — Run ESLint
+
+### `main/` (Electron)
+- `npm run dev` — Start main process (watch mode)
+- `npx prisma` — Run Prisma CLI
+
+---
+
+## 🧠 Features
+
+- 📋 Add, check, and delete todos and todo lists
+- ⚡ Seamless IPC communication (Electron ↔ Next.js)
+- 💾 Persistent local storage via SQLite
+- 🧩 Modular controllers for maintainability
+- 🎨 Responsive UI with Mantine components
+
+---
+
+## 🔐 Database Schema (Prisma)
+
+Located in `main/prisma/schema.prisma`:
+- `TodoList` model
+- `Todo` model with `checked` status
+
+---
+
+## 📦 Packaging
+
+You can build the app using:
+
+```bash
+npm run make
+```
+
+> The output will be located in the `out/` directory.
 
 ---
 
 ## 📄 License
 
-MIT License. Feel free to use and customize this template for your own Electron apps.
-
----
+MIT — use this boilerplate freely for your own projects.
