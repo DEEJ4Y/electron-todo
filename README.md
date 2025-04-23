@@ -45,7 +45,7 @@ electron-todo/
 ### 1. Clone and install dependencies
 
 ```bash
-git clone https://github.com/your-username/electron-todo.git
+git clone https://github.com/DEEJ4Y/electron-todo.git
 cd electron-todo
 npm install
 ```
